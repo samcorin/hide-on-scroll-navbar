@@ -1,27 +1,22 @@
-//     if (st > lastScrollTop && st > navbarHeight){
-//         $('nav').removeClass('nav-down').addClass('nav-up', 450);
-//     } else {
-//         if(st + $(window).height() < $(document.body).height()) {
-//             $('nav').removeClass('nav-up').addClass('nav-down', 450);
-//
-$(document).ready(function() {
-  var beforeScroll = 0;
-  var afterScroll;
-  var $navbar = $('.navbar-wrapper');
+var new_scroll_position = 0;
+var last_scroll_position;
+var header = document.getElementById("header");
 
-  // current postion
-  $(window).on("scroll", function(){
-    afterScroll = $(this).scrollTop();
+window.addEventListener('scroll', function(e) {
+  last_scroll_position = window.scrollY;
 
-    console.log(beforeScroll, afterScroll);
+  // Scrolling down
+  if (new_scroll_position < last_scroll_position && last_scroll_position > 80) {
+    // header.removeClass('slideDown').addClass('slideUp');
+    header.classList.remove("slideDown");
+    header.classList.add("slideUp");
 
-    if (beforeScroll < afterScroll && afterScroll > 60) {
-      // Scrolling down
-      $navbar.removeClass('slideDown').addClass('slideUp');
-    } else if (beforeScroll > afterScroll) {
-      // Scrolling up
-      $navbar.removeClass('slideUp').addClass('slideDown');
-    }
-    beforeScroll = afterScroll;
-  });
+  // Scrolling up
+  } else if (new_scroll_position > last_scroll_position) {
+    // header.removeClass('slideUp').addClass('slideDown');
+    header.classList.remove("slideUp");
+    header.classList.add("slideDown");
+  }
+
+  new_scroll_position = last_scroll_position;
 });
